@@ -30,8 +30,9 @@ NSString *const OAuthRefreshedAccessTokenNotification = @"OAuthRefreshedAccessTo
 
     oauthClient.debug = YES;
     oauthClient.delegate = self;    
-    oauthClient.userURL  = [NSURL URLWithString:@"https://graph.facebook.com/oauth/authorize"];
-    oauthClient.tokenURL = [NSURL URLWithString:@"https://graph.facebook.com/oauth/access_token"];
+    oauthClient.userURL  = [NSURL URLWithString:@"https://flattr.com/oauth/authorize"];
+    oauthClient.tokenURL = [NSURL URLWithString:@"https://flattr.com/oauth/token"];
+    oauthClient.redirectURL = [NSURL URLWithString:@"http://simsons.se/flattrcallback.html"];
     
     self.modalPresentationStyle = UIModalPresentationFormSheet;
     self.modalTransitionStyle   = UIModalTransitionStyleCrossDissolve;
@@ -47,7 +48,7 @@ NSString *const OAuthRefreshedAccessTokenNotification = @"OAuthRefreshedAccessTo
 
 - (void)viewDidAppear:(BOOL)animated
 {
-  NSDictionary *params = [NSDictionary dictionaryWithObject:@"touch" forKey:@"display"];
+  NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"code", @"response_type", @"flattr", @"scope", @"extendedread", @"scope", nil];
   [oauthClient authorizeUsingWebView:self.webView additionalParameters:params];
 }
 

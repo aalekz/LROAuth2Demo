@@ -7,20 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIHTTPRequest.h"
 #import "ASIHTTPRequestDelegate.h"
 
 @class LROAuth2AccessToken;
 
 @interface LROAuth2DemoViewController : UITableViewController <ASIHTTPRequestDelegate> {
   LROAuth2AccessToken *accessToken;
-  NSArray *friends;
-  NSMutableData *_data;
+  NSArray *things;
 }
 @property (nonatomic, retain) LROAuth2AccessToken *accessToken;
-@property (nonatomic, retain) NSArray *friends;
+@property (nonatomic, retain) NSArray *things;
 
 - (void)saveAccessTokenToDisk;
 - (void)beginAuthorization;
-- (void)loadFacebookFriends;
+- (void)loadThing;
 @end
 

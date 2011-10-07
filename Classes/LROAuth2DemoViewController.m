@@ -21,7 +21,7 @@ NSString * AccessTokenSavePath() {
 @implementation LROAuth2DemoViewController
 
 @synthesize accessToken;
-@synthesize friends;
+@synthesize things;
 
 - (void)viewDidLoad 
 {
@@ -46,13 +46,13 @@ NSString * AccessTokenSavePath() {
   if (self.accessToken == nil) { 
     [self beginAuthorization];
   } else {
-    [self loadFacebookFriends];
+    [self loadThing];
   }
 }
 
 - (void)dealloc 
 {
-  [friends release];
+  [things release];
   [accessToken release];
   [super dealloc];
 }
@@ -63,7 +63,7 @@ NSString * AccessTokenSavePath() {
   
   [self dismissModalViewControllerAnimated:YES];
   [self saveAccessTokenToDisk];
-  [self loadFacebookFriends];
+  [self loadThing];
 }
 
 - (void)didRefreshAccessToken:(NSNotification *)note;
@@ -71,7 +71,7 @@ NSString * AccessTokenSavePath() {
   self.accessToken = (LROAuth2AccessToken *)note.object;
   
   [self saveAccessTokenToDisk];
-  [self loadFacebookFriends];
+  [self loadThing];
 }
 
 #pragma mark -
@@ -88,35 +88,35 @@ NSString * AccessTokenSavePath() {
   [oauthController release];
 }
 
-- (void)loadFacebookFriends;
+- (void)loadThing;
 {
-  NSString *URLString = [NSString stringWithFormat:@"https://graph.facebook.com/me/friends?access_token=%@", [self.accessToken.accessToken stringByEscapingForURLQuery]];
-  NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
-  [_data release]; _data = nil;
-  _data = [[NSMutableData alloc] init];
-
-  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-  [NSURLConnection connectionWithRequest:request delegate:self];
+  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"https://api.flattr.com/rest/v2/profiles/alxx/things"]];
+  [request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"Bearer %@", self.accessToken.accessToken]];
+  NSLog(@"Request: POST %@", [request requestHeaders]);
+  [request setDelegate:self];
+  [request startAsynchronous];
 }
 
 #pragma mark -
-#pragma mark NSURLConnection methods
+#pragma mark ASIHTTPRequestDelegate methods
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [_data appendData:data];
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    NSError *jsonError = nil;
+    NSArray *thingsData = [[request responseData] yajl_JSON];
+    if (jsonError) {
+        NSLog(@"JSON parse error: %@", jsonError);
+    } else {
+        NSLog(@"Data: %@", thingsData);
+        self.things = thingsData;
+        [self.tableView reloadData];
+    }
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-  
-  NSError *jsonError = nil;
-  NSDictionary *friendsData = [_data yajl_JSON];
-  if (jsonError) {
-    NSLog(@"JSON parse error: %@", jsonError);
-  } else {
-    self.friends = [friendsData valueForKey:@"data"];
-    [self.tableView reloadData];
-  }
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSLog(@"Error: %@", [request error]);
+    //NSLog(@"Request failed: %@, %@", [request responseStatusCode], [request responseString]);
 }
 
 #pragma mark -
@@ -124,10 +124,10 @@ NSString * AccessTokenSavePath() {
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
-  if (self.friends == nil) {
+  if (self.things == nil) {
     return 0;
   }
-  return self.friends.count;
+  return self.things.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,10 +136,11 @@ NSString * AccessTokenSavePath() {
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:identifier] autorelease];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] autorelease];
   }
-  NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
-  cell.textLabel.text = [friend valueForKey:@"name"];
+  NSDictionary *thing = [self.things objectAtIndex:indexPath.row];
+  cell.textLabel.text = [thing valueForKey:@"title"];
+  cell.detailTextLabel.text = [thing valueForKey:@"description"];
   return cell;
 }
 

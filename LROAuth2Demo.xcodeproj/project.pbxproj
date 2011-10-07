@@ -42,7 +42,6 @@
 		A3B6F5CA11B54F1100533386 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5C911B54F1100533386 /* Reachability.m */; };
 		A3B6F5D611B54F2A00533386 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B6F5D511B54F2A00533386 /* SystemConfiguration.framework */; };
 		A3B6F5F211B54FA300533386 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B6F5F111B54FA300533386 /* CFNetwork.framework */; };
-		A3B6F5F711B54FB500533386 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B6F5F611B54FB500533386 /* libz.1.2.3.dylib */; };
 		A3B6F61111B5502600533386 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B6F61011B5502600533386 /* MobileCoreServices.framework */; };
 		A3B6F63D11B550ED00533386 /* OAuthRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F63B11B550ED00533386 /* OAuthRequestController.m */; };
 		A3B6F63E11B550ED00533386 /* OAuthRequestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B6F63C11B550ED00533386 /* OAuthRequestController.xib */; };
@@ -58,6 +57,7 @@
 		A3FD769C11E4A488008A44FB /* YAJLGen.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FD769711E4A488008A44FB /* YAJLGen.m */; };
 		A3FD769D11E4A488008A44FB /* YAJLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FD769911E4A488008A44FB /* YAJLParser.m */; };
 		A3FD76A211E4A496008A44FB /* YAJL_GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FD76A111E4A496008A44FB /* YAJL_GTMBase64.m */; };
+		B617B58F1436563F0002CC69 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B617B58E1436563F0002CC69 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,7 +130,6 @@
 		A3B6F5D511B54F2A00533386 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A3B6F5E211B54F6600533386 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIHTTPRequestConfig.h; path = Vendor/ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
 		A3B6F5F111B54FA300533386 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		A3B6F5F611B54FB500533386 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		A3B6F61011B5502600533386 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A3B6F63A11B550ED00533386 /* OAuthRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthRequestController.h; sourceTree = "<group>"; };
 		A3B6F63B11B550ED00533386 /* OAuthRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthRequestController.m; sourceTree = "<group>"; };
@@ -164,6 +163,7 @@
 		A3FD769911E4A488008A44FB /* YAJLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YAJLParser.m; path = "Vendor/LROAuth2Client/Vendor/yajl-objc/Classes/YAJLParser.m"; sourceTree = "<group>"; };
 		A3FD76A011E4A496008A44FB /* YAJL_GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YAJL_GTMBase64.h; path = "Vendor/LROAuth2Client/Vendor/yajl-objc/Libraries/GTM/YAJL_GTMBase64.h"; sourceTree = "<group>"; };
 		A3FD76A111E4A496008A44FB /* YAJL_GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YAJL_GTMBase64.m; path = "Vendor/LROAuth2Client/Vendor/yajl-objc/Libraries/GTM/YAJL_GTMBase64.m"; sourceTree = "<group>"; };
+		B617B58E1436563F0002CC69 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,12 +171,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B617B58F1436563F0002CC69 /* libz.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				A3B6F5D611B54F2A00533386 /* SystemConfiguration.framework in Frameworks */,
 				A3B6F5F211B54FA300533386 /* CFNetwork.framework in Frameworks */,
-				A3B6F5F711B54FB500533386 /* libz.1.2.3.dylib in Frameworks */,
 				A3B6F61111B5502600533386 /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +205,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B617B58E1436563F0002CC69 /* libz.dylib */,
 				A3B6F52811B54E6400533386 /* LROAuth2Client */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -241,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				A3B6F5F111B54FA300533386 /* CFNetwork.framework */,
-				A3B6F5F611B54FB500533386 /* libz.1.2.3.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
@@ -438,7 +438,11 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "LROAuth2Demo" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -550,7 +554,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -566,7 +570,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

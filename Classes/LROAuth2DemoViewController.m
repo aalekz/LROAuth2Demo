@@ -90,7 +90,7 @@ NSString * AccessTokenSavePath() {
 
 - (void)loadThing;
 {
-  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"https://api.flattr.com/rest/v2/profiles/alxx/things"]];
+  ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"https://api.flattr.com/rest/v2/users/alxx/things"]];
   [request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"Bearer %@", self.accessToken.accessToken]];
   NSLog(@"Request: POST %@", [request requestHeaders]);
   [request setDelegate:self];
